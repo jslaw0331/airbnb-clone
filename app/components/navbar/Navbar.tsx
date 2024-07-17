@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import Container from "../Container";
 import Categories from "./Categories";
 import Logo from "./Logo";
@@ -11,6 +12,10 @@ interface NavbarProps {
   currentUser?: SafeUser | null;
 }
 
+function SearchBarFallback() {
+  return <>placeholder</>;
+}
+
 const Navbar = ({ currentUser }: NavbarProps) => {
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
@@ -18,7 +23,9 @@ const Navbar = ({ currentUser }: NavbarProps) => {
         <Container>
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
             <Logo />
-            <Search />
+            <Suspense>
+              <Search />
+            </Suspense>
             <UserMenu currentUser={currentUser} />
           </div>
         </Container>
