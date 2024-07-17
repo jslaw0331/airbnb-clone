@@ -1,5 +1,4 @@
 import EmptyState from "../components/EmptyState";
-import TripsClient from "./TripsClient";
 
 import getCurrentUser from "../actions/getCurrentUser";
 import getListings from "../actions/getListings";
