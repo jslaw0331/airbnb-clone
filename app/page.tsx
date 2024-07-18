@@ -5,11 +5,15 @@ import EmptyState from "./components/EmptyState";
 import ListingCard from "./components/listings/ListingCard";
 
 interface HomeProps {
-  params: IListingParams;
+  searchParams: IListingParams;
 }
 
-const Home = async ({ params }: HomeProps) => {
-  const listings = await getListings(params);
+const Home = async ({ searchParams }: HomeProps) => {
+  if (searchParams.userId === "") {
+    return <div>Loading...</div>;
+  }
+
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
   if (listings.length === 0) {
