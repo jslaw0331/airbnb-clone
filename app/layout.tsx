@@ -10,6 +10,7 @@ import LoginModal from "./components/modals/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
 import ToasterProvider from "./providers/ToasterProvider";
 import SearchModal from "./components/modals/SearchModal";
+import { Suspense } from "react";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -17,8 +18,6 @@ export const metadata: Metadata = {
   title: "Airbnb",
   description: "Airbnb Clone",
 };
-
-export const dynamicParams = true;
 
 export default async function RootLayout({
   children,
@@ -30,13 +29,15 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <ToasterProvider />
-        <SearchModal />
-        <LoginModal />
-        <RegisterModal />
-        <RentModal />
-        <Navbar currentUser={currentUser} />
-        <div className="pb-20 pt-28">{children}</div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ToasterProvider />
+          <SearchModal />
+          <LoginModal />
+          <RegisterModal />
+          <RentModal />
+          <Navbar currentUser={currentUser} />
+          <div className="pb-20 pt-28">{children}</div>
+        </Suspense>
       </body>
     </html>
   );

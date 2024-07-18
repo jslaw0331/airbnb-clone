@@ -11,10 +11,7 @@ import { SafeUser } from "@/app/types";
 interface NavbarProps {
   currentUser?: SafeUser | null;
 }
-
-function SearchBarFallback() {
-  return <>placeholder</>;
-}
+export const dynamic = "force-dynamic";
 
 const Navbar = ({ currentUser }: NavbarProps) => {
   return (
@@ -23,9 +20,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
         <Container>
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0">
             <Logo />
-            <Suspense>
-              <Search />
-            </Suspense>
+            <Search />
             <UserMenu currentUser={currentUser} />
           </div>
         </Container>
