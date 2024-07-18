@@ -10,7 +10,7 @@ interface HomeProps {
 
 const Home = async ({ searchParams }: HomeProps) => {
   if (searchParams.userId === "") {
-    return <div>Loading...</div>;
+    return;
   }
 
   const listings = await getListings(searchParams);
